@@ -1,0 +1,29 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: of-google-analytics
+  namespace: openfaas
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        prometheus.io.scrape: "false"
+      labels:
+        app: of-google-analytics
+    spec:
+      containers:
+      - name: of-google-analytics
+        image: matipan/google-analytics:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 2
+          periodSeconds: 10
+          timeoutSeconds: 2
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+
