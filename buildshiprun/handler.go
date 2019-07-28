@@ -211,6 +211,9 @@ func Handle(req []byte) string {
 
 		annotationWhitelist := []string{
 			"topic",
+			"com.openfaas.health.http.path",
+			"com.openfaas.health.http.initialDelay",
+			"com.openfaas.scale.zero",
 		}
 		userAnnotations := buildAnnotations(annotationWhitelist, event.Annotations)
 		userAnnotations[sdk.FunctionLabelPrefix+"git-repo-url"] = event.RepoURL
@@ -229,8 +232,9 @@ func Handle(req []byte) string {
 				sdk.FunctionLabelPrefix + "git-private":    fmt.Sprintf("%d", private),
 				sdk.FunctionLabelPrefix + "git-scm":        event.SCM,
 				sdk.FunctionLabelPrefix + "git-branch":     buildBranch(),
-				"faas_function":                            serviceValue,
-				"app":                                      serviceValue,
+
+				"faas_function": serviceValue,
+				"app":           serviceValue,
 				"com.openfaas.scale.min":    scalingMinLimit,
 				"com.openfaas.scale.max":    scalingMaxLimit,
 				"com.openfaas.scale.factor": scalingFactor,

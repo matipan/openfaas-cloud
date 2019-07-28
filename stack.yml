@@ -47,7 +47,7 @@ functions:
   git-tar:
     lang: dockerfile
     handler: ./git-tar
-    image: functions/of-git-tar:0.13.0
+    image: matipan/of-git-tar:0.13.0-recursive
     labels:
       openfaas-cloud: "1"
       role: openfaas-system
@@ -69,7 +69,7 @@ functions:
   buildshiprun:
     lang: go
     handler: ./buildshiprun
-    image: functions/of-buildshiprun:0.11.1
+    image: matipan/of-buildshiprun:0.11.1-annotations
     labels:
       openfaas-cloud: "1"
       role: openfaas-system

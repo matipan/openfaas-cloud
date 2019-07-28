@@ -294,7 +294,7 @@ func clone(pushEvent sdk.PushEvent) (string, error) {
 		}
 	}
 
-	git := exec.Command("git", "clone", cloneURL)
+	git := exec.Command("git", "clone", "--recurse-submodules", "-j8", cloneURL)
 	git.Dir = path.Join(workDir, pushEvent.Repository.Owner.Login)
 	log.Println(git.Dir)
 	err = git.Start()
